@@ -1,78 +1,315 @@
-# Spendly
+# 💸 Spendly — Personal Expense Tracker
 
-Spendly is a Flutter personal spending assistant. It uses Firebase Authentication for accounts and Cloud Firestore for expenses, monthly budgets, and savings goals.
+> A clean and modern Flutter expense tracker designed to make personal
+> finance management simple, visual, and effortless.
 
-## Requirements
+<p align="center">
+  <b>Track • Manage • Understand • Improve</b>
+</p>
 
-- Flutter stable with Dart 3.5 or later
-- Android Studio/Android SDK for Android builds
-- Node.js 20 or 22 and npm for Firestore rules tests
-- Java 21 or later for the current Firebase CLI Firestore emulator
-- A Firebase project with Email/Password Authentication and Cloud Firestore enabled
+---
 
-## Firebase Setup
+## 📱 About Spendly
 
-The checked-in Android Firebase settings point to project `spendly2-1adc5`. Authentication and Firestore are separate Firebase products: successful sign-in does not mean Firestore indexes or security rules are ready. This is a student project and does not integrate payments, subscriptions, Stripe, or in-app purchases. You can use the Firebase Spark (free) plan for this app; do not enable billing or upgrade plans unless you intentionally choose to.
+**Spendly** is a personal expense tracking application built with
+**Flutter, Dart, Firebase Authentication, and Cloud Firestore**.
 
-For a simple setup without CLI:
+The main goal of Spendly is to provide a simple and user-friendly way to
+record daily expenses, organize spending by category, and understand
+monthly spending habits through a clean dashboard and insights.
 
-1. In Firebase Console, open project `spendly2-1adc5` and enable **Authentication > Sign-in method > Email/Password**.
-2. Open **Firestore Database**. If a database already exists in test mode, keep using it; there is no need to create it again.
-3. In **Firestore Database > Rules**, replace the rules with the basic signed-in owner rules in [firestore.rules](firestore.rules), then click **Publish**. A signed-in user can work with their own profile and financial documents; they cannot read or change another user's documents. This is intentionally simpler than production schema validation, but safer than open test-mode rules.
-4. In **Firestore Database > Indexes > Composite**, create the Expenses list index:
-   - Collection ID: `expenses`
-   - `userId`: Ascending
-   - `date`: Descending
-   - Query scope: Collection
+The application was developed as part of the **CyphLab Flutter Developer
+Internship Practical Task**.
 
-   Wait until the index status is **Enabled**, then retry in the app. Other queries may request additional indexes; use the Firebase error's **Create index** link, or refer to [firestore.indexes.json](firestore.indexes.json). Rules do not create indexes.
+---
 
-Firestore's automatic **test mode** rules are open to anyone and expire after a temporary period. Avoid leaving those rules published. The owner rules in this project are still basic, but require sign-in and isolate each user's data.
+## ✨ Features
 
-The CLI is not required. If you later choose to publish from a terminal, install Firebase CLI and sign in, then run `firebase deploy --only firestore:rules,firestore:indexes --project spendly2-1adc5`.
+### 💰 Expense Management
 
-## Install and Run
+- ➕ Add new expenses
+- ✏️ Edit existing expenses
+- 🗑️ Delete expenses with confirmation
+- 📝 Add optional notes to expenses
+- 💵 Record expense amount
+- 📅 Select expense date
+- 🏷️ Categorize expenses
 
-From the repository root:
+### 📊 Dashboard & Insights
 
-```sh
+- 📈 Monthly spending overview
+- 📅 Advanced date-range filtering
+- 📊 Category-based expense visualization
+- 💳 Total spending summary
+- 📅 Monthly expense tracking
+- 🌙 Dark mode improvements
+- 🔎 Search and filter expenses
+- 💡 Spending insights
+
+### 🔐 Authentication
+
+- 🔑 User registration
+- 🔓 User login
+- 🚪 Logout
+- 🔄 Password reset
+- 👤 Profile management
+
+### 🎨 User Experience
+
+- Clean and modern interface
+- Responsive Flutter UI
+- Consistent typography and spacing
+- Loading states
+- Empty states
+- Error handling
+- Confirmation dialogs for destructive actions
+- Smooth navigation
+- offline Service
+
+---
+
+## 🛠️ Technologies & Packages
+
+| Technology | Purpose |
+|---|---|
+| **Flutter** | Cross-platform UI development |
+| **Dart** | Application programming language |
+| **Firebase Authentication** | User authentication |
+| **Cloud Firestore** | Cloud database |
+| **Provider** | State management |
+| **fl_chart** | Charts and data visualization |
+| **intl** | Date and number formatting |
+
+---
+
+## 🏗️ Project Structure
+
+The project follows a modular structure to keep the application
+maintainable and easy to extend.
+
+```text
+lib/
+│
+├── models/
+│   └── Expense model
+│
+├── providers/
+│   └── Application state management
+│
+├── services/
+│   └── Firebase / Firestore services
+│
+├── screens/
+│   ├── auth/
+│   ├── home/
+│   ├── expenses/
+│   ├── budget/
+│   ├── insights/
+│   └── profile/
+│
+├── widgets/
+│   └── Reusable UI components
+│
+├── utils/
+│   └── Helpers and constants
+│
+└── main.dart
+```
+
+---
+
+## 🔥 Firebase
+
+Spendly uses Firebase for authentication and cloud data storage.
+
+### Firebase Authentication
+
+Used for:
+
+- User registration
+- User login
+- Password reset
+- Logout
+- User account management
+
+### Cloud Firestore
+
+Used to securely store:
+
+- User expense records
+- Expense categories
+- Amounts
+- Dates
+- Notes
+- Other expense-related information
+
+---
+
+## 📦 Expense Data
+
+Each expense contains information such as:
+
+```text
+Title
+Amount
+Category
+Date
+Note (Optional)
+```
+
+This structure makes it possible to organize and analyze spending over
+different time periods and categories.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+```
+
+### 2. Open the project
+
+```bash
+cd spendly
+```
+
+### 3. Install dependencies
+
+```bash
 flutter pub get
-flutter run -d <device-id>
 ```
 
-List attached targets with `flutter devices`. Android's current application ID is `com.example.expencetracker`; change it only together with the Firebase Android registration and native configuration if adopting a production identifier.
+### 4. Configure Firebase
 
-On Android, Firestore disk persistence is enabled. Previously loaded records remain available from the local cache while offline, and Firestore queues writes locally to sync when connectivity returns. The app's Firestore snapshot listeners update the screens as soon as cached or server data changes; it intentionally does not poll Firebase every two seconds, which would create unnecessary reads and battery use. Data that has never been cached cannot be fetched during a first-ever offline launch.
+Create a Firebase project and connect it with the Flutter application.
 
-## Validation
+Add the required Firebase configuration files for your platform.
 
-Run Dart analysis and the Flutter unit tests:
+### 5. Run the application
 
-```sh
-flutter analyze
-flutter test
+```bash
+flutter run
 ```
 
-Install the Node test dependencies and run the Firestore rules against the local emulator:
+---
 
-```sh
-npm ci
-npm run test:rules
-```
+## 🧪 Testing
 
-The rules tests cover anonymous access, owner and cross-owner reads, profile identity changes, expense ownership, budget merge writes, and goal progress updates. They do not require a Firebase login or touch production data.
+The application was tested during development with focus on:
 
-Build Android locally:
+- Expense creation
+- Expense editing
+- Expense deletion
+- Form validation
+- Firebase authentication
+- Firestore data operations
+- Search and filtering
+- Loading states
+- Empty states
+- Error handling
+- Different screen sizes
 
-```sh
-flutter build apk --debug
-```
+> Additional device testing is recommended before production release.
 
-For a release, configure production Android signing separately and verify the app on a physical Android device with a test Firebase account. Confirm account creation/login, expense CRUD, budgets across months, insights, and savings-goal CRUD/progress. Do not use production financial data during smoke testing.
+---
 
-## Data Collections
+## 🤖 AI Tools Used
 
-- `users/{uid}`: account profile, readable and editable only by that account
-- `expenses/{expenseId}`: expense records with an immutable `userId`
-- `budgets/{budgetId}`: monthly budget records owned by `userId`
-- `goals/{goalId}`: savings goals with an immutable `userId`
+AI-assisted development tools were used during the development process to
+improve productivity, code quality, debugging, and documentation.
+
+### ChatGPT
+
+**Used for:**
+
+- Flutter/Dart development guidance
+- Debugging and identifying potential issues
+- UI/UX improvement ideas
+- Code structure suggestions
+- Firebase implementation guidance
+- README documentation
+- Reviewing the application against the internship requirements
+
+ChatGPT was used as a development assistant, while the final
+implementation and decisions were reviewed and integrated into the
+project manually.
+
+### GitHub Copilot
+
+**Used for:**
+
+- Code completion
+- Boilerplate generation
+- Development productivity
+
+---
+
+## 🎯 Design Goals
+
+Spendly was designed around a few simple principles:
+
+### Simple
+
+Users should be able to add and manage an expense quickly.
+
+### Clear
+
+Important financial information should be easy to understand at a
+glance.
+
+### Modern
+
+The interface uses a clean visual hierarchy, cards, spacing, and
+consistent components.
+
+### Practical
+
+The application focuses on useful expense-tracking functionality
+without unnecessary complexity.
+
+---
+
+## 📱 Main Screens
+
+The application includes:
+
+- 🏠 **Home** — Monthly spending overview
+- 💳 **Expenses** — Expense history and filtering
+- 💰 **Budget** — Budget tracking
+- 📊 **Insights** — Spending analysis and charts
+- 👤 **Profile** — User account management
+
+---
+
+## 🔮 Future Improvements
+
+Possible future improvements include:
+
+- 📤 Export expenses as CSV/PDF
+- 🔔 Budget notifications
+- ☁️ Improved offline support
+- 🔐 Additional authentication providers
+- 📈 More detailed financial analytics
+
+
+---
+
+## 👨‍💻 Developer
+
+**AMC Sandaruwan**
+
+Flutter Developer | Mobile Application Development
+https://amcnw2002.github.io/portfolio/
+
+---
+
+## 📄 License
+
+This project was created for educational and internship evaluation
+purposes.
+
+---
+
