@@ -1,11 +1,11 @@
 {
-    "name": "click_counter",
-    "short_name": "click_counter",
+    "name": "Spendly",
+    "short_name": "Spendly",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#07183F",
+    "theme_color": "#07183F",
+    "description": "Spendly personal finance tracker.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

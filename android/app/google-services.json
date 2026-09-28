@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "252803967430",
-    "project_id": "expensetracker-82e2b",
-    "storage_bucket": "expensetracker-82e2b.firebasestorage.app"
+    "project_number": "168652083968",
+    "project_id": "spendly2-1adc5",
+    "storage_bucket": "spendly2-1adc5.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:252803967430:android:e2cceb1d41bfccfda4aac7",
+        "mobilesdk_app_id": "1:168652083968:android:601d015b0a7d99719dd9e5",
         "android_client_info": {
-          "package_name": "com.example.expense_tracker"
+          "package_name": "com.example.expencetracker"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDFRbq_OuASFe1tfZmjKK5C3-10FQ15730"
+          "current_key": "AIzaSyAbAViPxajN9JKp1L09NjmsanX21NyZ3FI"
         }
       ],
       "services": {
